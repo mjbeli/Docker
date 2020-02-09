@@ -67,3 +67,5 @@ Al hacer un "docker inspect #NombreContenedor" nos devuelve un JSON que contiene
                     "GlobalIPv6PrefixLen": 0,
                     "MacAddress": ""
                 }
+
+
