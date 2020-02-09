@@ -1,0 +1,13 @@
+
+  docker images --> lista las imágenes instaladas
+	
+  
+  --> Buscar imágenes en docker hub
+  docker search [OPTIONS] TERM
+  docker search ubuntu
+  docker run hello-world --> run levanta un contenedor, ¡¡cada vez levanta un contenedor cuidado!!
+                            Si no tenemos la imagen en local, la busca en docker hub.
+
+  docker pull [OPTIONS] NAME[:TAG|@DIGEST] --> baja una imagen de un registro (como docker hub)
+  
+  docker image rm [OPTIONS] IMAGE [IMAGE...] --> borra una o todas las imágenes ¡¡Cuidado!!
