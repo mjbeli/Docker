@@ -44,4 +44,26 @@ NETWORKS TYPES
 	overlay: overlay networks connect multiple Docker daemons together and enable swarm services to communicate 
 		with each other.
 	none: for this container, disable all networking. Usually used in conjunction with a custom network driver.
+	
+ 	- User-defined bridge networks are best when you need multiple containers to communicate on the same Docker host.
+ 	- Host networks are best when the network stack should not be isolated from the Docker host, but you want other 
+ 	aspects of the container to be isolated.
+ 	- Overlay networks are best when you need containers running on different Docker hosts to communicate, 
+	or when multiple applications work together using swarm services.
 
+Al hacer un "docker inspect #NombreContenedor" nos devuelve un JSON que contiene la red a la que pertenece el contenedor:
+	"Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "50411d976e93a7703e149cc73f17187d9f5a4e5168f31c566d8a04ed889ba7e8",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": ""
+                }
