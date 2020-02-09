@@ -1,0 +1,35 @@
+Más info: https://docs.docker.com/storage/volumes/
+
+/var/lib/docker/ --> directorio en linux en el que se guarda información sobre los volúmenes
+/var/lib/docker/volumes --> directorio en linux donde se crea una carpeta con el UUID de cada volumen, 
+                            dentro de esa carpeta se guarda configuración del volumen.
+
+- Al crear un contenedor con un volumen que no existe, docker crea el volumen. 
+Así que se pueden crear al vuelo. Está bien crear el volumen antes con un nombre 
+porque si se crea al vuelo docker le va a poner un nombre con un UUID difícil de identificar. Mirar ejemplo más abajo.
+
+- Los volúmenes sigue existiendo aunque se pare y borre el contenedor.
+
+	docker volume create my-vol   --> crea un volumen con nombre my-vol
+  	docker volume rm my-vol --> eliminar un volumen
+	docker volume ls  --> listar volúmenes
+	docker volume inspect my-vol --> inspeccionar un volumen
+
+
+	docker run -it -v /datos ubuntu
+	sudo ls /var/lib/docker/volumes
+	docker volume inspect  402f3ba6a9dedf795892f727ce4da53fb807809ae4fb716c5a3f96a1ccf4ef40
+	docker run -it -v NombreVolumen:/directorioTest --name miubuntu ubuntu  --> crea un volumen con nombre NombreVolumen en la ruta señalada del contedor
+	docker volume prune --> elimina todos los volúmenes que no se están usando.
+	docker volume rm NombreVolumen --> elimina el volumen NombreVolumen (error si está actualmente en uso)
+
+La opción -v consiste en 3 campos separados por ":", el orden es importante y el significado no es obvio:
+	- Primer campo: nombre del volumen. Es opcional, si no se pone se considera volumen anónimo.
+	- Segundo campo: ruta donde se monta el volumen en el contenedor.
+	- Tercer campo: opcional, lista de opciones separadas por "," como "ro".
+
+
+
+
+  
+						
