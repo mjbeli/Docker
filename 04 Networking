@@ -34,3 +34,14 @@
 
 	If we stop all containers then we'll get:
 	"Containers": {},
+
+NETWORKS TYPES
+	brige: default network. Bridge networks are usually used when your applications run in standalone 
+		containers that need to communicate. Creating a network without a specified type will create
+		of this type.
+	host: remove network isolation between the container and the Docker host, and use the host’s networking directly
+		usa la red del propio equipo host.
+	overlay: overlay networks connect multiple Docker daemons together and enable swarm services to communicate 
+		with each other.
+	none: for this container, disable all networking. Usually used in conjunction with a custom network driver.
+
