@@ -1,0 +1,15 @@
+  docker ps    --> muestra los contenedores que están ejecutando ahora mismo.
+	docker ps -a --> muestra todos los contenedores, incluso los no ejecutándose.
+  
+  docker run -it ubuntu bash --> ejecuta bash dentro del contenedor, abre una terminal
+  
+  Los contenedores parados no están destruidos, se pueden volver a levantar con "docker start -i #IDENTIFICADOR"
+  
+STOP A CONTAINER
+    docker stop 24519eab6ba5  --> para un contenedor de forma "amable", primero solicita parada y después 
+                                  de un período de gracia envía un kill al contenedor.
+	  docker kill 24519eab6ba5  --> fuerza la parada de un contenedor de forma abrupta.
+  
+REMOVE CONTAINERS  
+  docker container rm $(docker container ls -aq) --> borra todos los contenedores
+  docker container rm $(docker ps -aq) --> otra forma de borrar todos los contenedores
