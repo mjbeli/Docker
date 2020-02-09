@@ -1,15 +1,29 @@
   docker ps    --> muestra los contenedores que están ejecutando ahora mismo.
-	docker ps -a --> muestra todos los contenedores, incluso los no ejecutándose.
+  docker ps -a --> muestra todos los contenedores, incluso los no ejecutándose.
   
-  docker run -it ubuntu bash --> ejecuta bash dentro del contenedor, abre una terminal
-  
-  Los contenedores parados no están destruidos, se pueden volver a levantar con "docker start -i #IDENTIFICADOR"
-  
+START A CONTAINER
+	docker run -it ubuntu bash --> ejecuta bash dentro del contenedor, abre una terminal	
+	docker run -it -d python --> levanta un contenedor python de forma interactiva en background
+	docker run --name NombreContenedor nginx --> arranca un contenedor de nginx con nombre "NombreContenedor".
+
+INTERACTION WITH A CONTAINER
+	Los contenedores parados no están destruidos, se pueden volver a levantar con "docker start -i #IDENTIFICADOR"
+	docker exec -it 24519eab6ba5 date  --> ejecuta comando datede forma interactiva en un contenedor on id 24519eab6ba5
+	docker exec -it 24519eab6ba5 bash  --> exec ejecuta un comando en un contenedor YA levantado
+	
 STOP A CONTAINER
-    docker stop 24519eab6ba5  --> para un contenedor de forma "amable", primero solicita parada y después 
-                                  de un período de gracia envía un kill al contenedor.
-	  docker kill 24519eab6ba5  --> fuerza la parada de un contenedor de forma abrupta.
+ 	docker stop 24519eab6ba5  --> para un contenedor de forma "amable", primero solicita parada y después 
+                                  	de un período de gracia envía un kill al contenedor.
+	docker kill 24519eab6ba5  --> fuerza la parada de un contenedor de forma abrupta.
   
 REMOVE CONTAINERS  
-  docker container rm $(docker container ls -aq) --> borra todos los contenedores
-  docker container rm $(docker ps -aq) --> otra forma de borrar todos los contenedores
+  	docker container rm $(docker container ls -aq) --> borra todos los contenedores
+  	docker container rm $(docker ps -aq) --> otra forma de borrar todos los contenedores
+
+LOGS & INFO
+	docker run -d ubuntu sh -c "while true; do date; sleep 3; done"
+	docker logs 1294e2734fb1  --> muestra logs de un contenedor.
+	docker logs --tail 2 1294e2734fb1 --> mestra las dos últimas salidas de log del contenedor.
+	docker top 71fa --> muestra los procesos en ejecución de un contendor.
+	docker stats 71fa --> estadísticas de uso de CPU, memoria, etc.
+	docker inspect 71fa97188467  --> inspecciona el contendor, aquí se puede ver la network sobre la que corre.
