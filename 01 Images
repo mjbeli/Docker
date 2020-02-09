@@ -9,5 +9,6 @@
                             Si no tenemos la imagen en local, la busca en docker hub.
 
   docker pull [OPTIONS] NAME[:TAG|@DIGEST] --> baja una imagen de un registro (como docker hub)
+  docker pull python
   
   docker image rm [OPTIONS] IMAGE [IMAGE...] --> borra una o todas las imágenes ¡¡Cuidado!!
