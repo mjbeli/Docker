@@ -1,0 +1,11 @@
+docker run -d -P nginx  --> la opción -P publica todos los puertos del contenedor al host
+docker run -d -p 8080:80 nginx --> la opción -p mapea explícitamente el puerto 8080 del host 
+                                  al puerto 80 del contenedor (podemos ver en el dockerfile del 
+                                  contenedor nginx que se va a publicar en el puerto 80). 
+                                  La opción -d ejecuta un contenedor en modo "detached"/background. 
+                                  Tanto con la opción -d como sin ella, esta instrucción lanza el 
+                                  nginx y se queda levantado, ¡pero sin la opción -d el shell de linux 
+                                  se queda esperando hasta que ngix termina de ejecutar. 
+                                  Con el -d el contenedor se queda corriendo pero el shell está desbloqueado 
+                                  y puedes seguir trabajando.
+                                  
