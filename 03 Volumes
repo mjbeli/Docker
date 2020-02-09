@@ -19,7 +19,8 @@ porque si se crea al vuelo docker le va a poner un nombre con un UUID difícil d
 	docker run -it -v /datos ubuntu
 	sudo ls /var/lib/docker/volumes
 	docker volume inspect  402f3ba6a9dedf795892f727ce4da53fb807809ae4fb716c5a3f96a1ccf4ef40
-	docker run -it -v NombreVolumen:/directorioTest --name miubuntu ubuntu  --> crea un volumen con nombre NombreVolumen en la ruta señalada del contedor
+	docker run -it -v NombreVolumen:/directorioTest --name miubuntu ubuntu  --> crea un volumen con nombre NombreVolumen 
+											en la ruta señalada del contedor
 	docker volume prune --> elimina todos los volúmenes que no se están usando.
 	docker volume rm NombreVolumen --> elimina el volumen NombreVolumen (error si está actualmente en uso)
 
@@ -28,8 +29,25 @@ La opción -v consiste en 3 campos separados por ":", el orden es importante y e
 	- Segundo campo: ruta donde se monta el volumen en el contenedor.
 	- Tercer campo: opcional, lista de opciones separadas por "," como "ro".
 
+La documentación aconseja usar --mount en lugar de -v:
+	docker volume create VolumeData
+	docker inspect VolumeData
+	docker run -it --mount source=VolumeData,target=/app --name miubuntu ubuntu
+ 	docker run -d --name=nginxtest --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly nginx:latest
+	
+La opción --mount recibe pares "clave=valor", el orden no es importante:
+	type=bind|volume|tmpfs: tipo por defecto volume. 
+				tmpfs es temporal, solo se guarda en la memoria y cuando el contendor 
+				se para el volumen se elimina y no se persiste nada.
+				Bind es de los inicios de docker y tiene funciones más limitadas que volume. El directorio del
+				host es montado dentro del contenedor. Al contrario, cuando se usa un volume, se crea una nueva
+				carpeta dentro del directorio de almacenamiento de docker del host (/var/lib/docker/volumes)
+				y es docker el que gestiona el contenido de ese directorio creado.
+				
+	source=NombreVolumen (se puede usar también src=NombreVolumen): nombre del volúmen. Para volúmenes anónimos se omite.
+	destination=Ruta (se puede usar también dst=Ruta o target=Ruta): ruta destino donde se montará en el contenedor.
+	readonly: si se indica, se monta el volúmen como solo lectura.
 
-
-
+VOLUMEN COMO SERVICIO: solo soportado por --mount
   
 						
