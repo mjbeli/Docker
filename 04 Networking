@@ -1,22 +1,22 @@
   More info: https://docs.docker.com/network/
   
-  docker run -d -P nginx  --> la opción -P publica todos los puertos del contenedor al host
-  docker run -d -p 8080:80 nginx --> la opción -p mapea explícitamente el puerto 8080 del host 
-                                  al puerto 80 del contenedor (podemos ver en el dockerfile del 
-                                  contenedor nginx que se va a publicar en el puerto 80). 
-                                  La opción -d ejecuta un contenedor en modo "detached"/background. 
-                                  Tanto con la opción -d como sin ella, esta instrucción lanza el 
-                                  nginx y se queda levantado, ¡pero sin la opción -d el shell de linux 
-                                  se queda esperando hasta que ngix termina de ejecutar. 
-                                  Con el -d el contenedor se queda corriendo pero el shell está desbloqueado 
-                                  y puedes seguir trabajando.
+  	docker run -d -P nginx  --> la opción -P publica todos los puertos del contenedor al host
+  	docker run -d -p 8080:80 nginx --> la opción -p mapea explícitamente el puerto 8080 del host 
+					  al puerto 80 del contenedor (podemos ver en el dockerfile del 
+					  contenedor nginx que se va a publicar en el puerto 80). 
+					  La opción -d ejecuta un contenedor en modo "detached"/background. 
+					  Tanto con la opción -d como sin ella, esta instrucción lanza el 
+					  nginx y se queda levantado, ¡pero sin la opción -d el shell de linux 
+					  se queda esperando hasta que ngix termina de ejecutar. 
+					  Con el -d el contenedor se queda corriendo pero el shell está desbloqueado 
+					  y puedes seguir trabajando.
                                   
-  docker network --help
+  	docker network --help
 	docker network list
-	docker inspect 7581cb4e54a2 | grep IPAd
-  docker network inspect bridge -> list all alive containers using bridge network, see an example above:
-  
-  "Containers": {
+	
+  	docker network inspect bridge -> list all alive containers using bridge network, see an example above:
+  	Among other info we can see 2 containers running in brige network.
+  	"Containers": {
             "5ab8406cb839274a78a00bca2683271d80e0acc34dd99f44cfdff78bf0303e2c": {
                 "Name": "musing_khorana",
                 "EndpointID": "64b95b1591a1747e7077990e6400732e553550eaccc747ca9bcce19d1ff1d1d4",
@@ -31,4 +31,6 @@
                 "IPv4Address": "172.17.0.3/16",
                 "IPv6Address": ""
             }
-            
+
+	If we stop all containers then we'll get:
+	"Containers": {},
