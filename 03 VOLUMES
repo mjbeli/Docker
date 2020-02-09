@@ -1,0 +1,21 @@
+
+  docker volume create my-vol   --> crea un volumen con nombre my-vol
+  docker volume rm my-vol --> eliminar un volumen
+	docker volume ls  --> listar volúmenes
+	docker volume inspect my-vol --> inspeccionar un volumen
+
+/var/lib/docker/ --> directorio en linux en el que se guarda información sobre los volúmenes
+/var/lib/docker/volumes --> directorio en linux donde se crea una carpeta con el UUID de cada volumen, 
+                            dentro de esa carpeta se guarda configuración del volumen.
+
+- Al crear un contenedor con un volumen que aún no existe, docker crea el volumen. Así que se pueden crear al vuelo.
+Está bien crear el volumen antes con un nombre porque si se crea al vuelo al mismo tiempo que el contenedor docker le va
+a poner un nombre con un UUID difícil de identificar. Mirar ejemplo más abajo:
+
+	docker run -it -v /datos ubuntu
+	sudo ls /var/lib/docker/volumes
+	docker volume inspect  402f3ba6a9dedf795892f727ce4da53fb807809ae4fb716c5a3f96a1ccf4ef40
+	docker run -it -v /home/lab/test:/directorioTest --name miubuntu ubuntu
+	docker volume prune --> elimina todos los volúmenes que no se están usando.
+  
+						
