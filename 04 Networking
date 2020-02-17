@@ -1,5 +1,7 @@
   More info: https://docs.docker.com/network/
   
+  	docker network --help
+	docker network list
   	docker run -d -P nginx  --> la opción -P publica todos los puertos del contenedor al host
   	docker run -d -p 8080:80 nginx --> la opción -p mapea explícitamente el puerto 8080 del host 
 					  al puerto 80 del contenedor (podemos ver en el dockerfile del 
@@ -11,10 +13,8 @@
 					  Con el -d el contenedor se queda corriendo pero el shell está desbloqueado 
 					  y puedes seguir trabajando.
                                   
-  	docker network --help
-	docker network list
-	
-  	docker network inspect bridge -> list all alive containers using bridge network, see an example above:
+  	
+  	docker network inspect bridge -> list all alive containers using bridge network, see an example below:
   	Among other info we can see 2 containers running in brige network.
   	"Containers": {
             "5ab8406cb839274a78a00bca2683271d80e0acc34dd99f44cfdff78bf0303e2c": {
@@ -68,4 +68,8 @@ Al hacer un "docker inspect #NombreContenedor" nos devuelve un JSON que contiene
                     "MacAddress": ""
                 }
 
-
+	docker network create mired --> crea una red con nombre "mired"
+	docker run -it -d --network mired ubuntu --> crear un contenedor de la imagen ubuntu y la asigna a la red "mired"
+	docker network connect mired ubuntu3 --> conecta el contenedor "ubuntu3" a la red "mired" 
+						¡atención! no desagina la red que tuviera, así que ubuntu3 estará en 2 redes.
+	
