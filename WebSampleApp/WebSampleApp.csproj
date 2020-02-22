@@ -6,6 +6,9 @@
 
 
   <ItemGroup>
+    <Reference Include="BownlingCode">
+       <HintPath>.\libs\BownlingCode.dll</HintPath>
+     </Reference>
   </ItemGroup>
 
 </Project>

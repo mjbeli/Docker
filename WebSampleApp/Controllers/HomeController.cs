@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebSampleApp.Models;
+using BusinessLogic;
 
 namespace WebSampleApp.Controllers
 {
@@ -20,7 +21,11 @@ namespace WebSampleApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            BowlingResultViewModel res = new BowlingResultViewModel()
+                                    {
+                                        resultBowlingGame = new PlayBowling().GameSample()
+                                    };
+            return View(res);
         }
 
         public IActionResult Privacy()
