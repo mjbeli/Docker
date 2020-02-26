@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebSampleApp.Models;
 using BusinessLogic;
+using BownlingCode;
 
 namespace WebSampleApp.Controllers
 {
@@ -21,10 +22,16 @@ namespace WebSampleApp.Controllers
 
         public IActionResult Index()
         {
+            PlayBowling game = new PlayBowling();
+            IList<FrameDto> myRolls;
+
+            int resultPoints = game.GameSample(out myRolls);
+
             BowlingResultViewModel res = new BowlingResultViewModel()
                                     {
-                                        resultBowlingGame = new PlayBowling().GameSample()
-                                    };
+                                        resultBowlingGame = resultPoints,
+                                        thisIsMyGame = myRolls
+                                    };            
             return View(res);
         }
 

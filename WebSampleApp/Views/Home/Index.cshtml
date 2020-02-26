@@ -8,6 +8,24 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
-    <h3>Vamos a jugar a los bolos...</h3>
+    <h4>Vamos a jugar a los bolos...</h4>
     <p>El resultado ha sido... @Model.resultBowlingGame</p>
+
+    <p>Las tiradas han sido...</p>
+
+    @foreach (var item in Model.thisIsMyGame)
+    {
+        <p>@item.getMySum().ToString()
+            @if(@item.isSpare())
+            {
+                 @(" - Semipleno ")
+            }
+
+            @if(@item.isStrike())
+            {
+                 @(" - pleno! ")
+            }
+        </p>
+    }
+    
 </div>
