@@ -8,6 +8,8 @@ https://docs.docker.com/engine/reference/builder/
     FROM --> Imagen que tomamos como base, las siguientes instrucciones se ejecutarán sobre esa imagen.
             Cuando se usa un segundo FROM se "sobreescribe" la imagen base 
             y las siguientes instrucciones se ejecutarán sobre la segunda imagen.
+            
+            FROM debian:stable --> después de los ":" se especifica el label de la imagen.
     
     RUN --> ejecuta comandos en la imagen actual (definida en el FROM) y les hace commit.
             Estas ejecuciones se van "acumulando", la imagen resultante se usará en el siguiente paso
@@ -23,7 +25,7 @@ https://docs.docker.com/engine/reference/builder/
     CMD --> ¡No confundir con RUN! El propósito es definir el comportamiento de un contenedor en ejecución!
             RUN ejecuta un comando y lo "comitea" a la imagen, 
             CMD NO ejecuta nada en tiempo de compilación, si no que especifica el comando que es el propósito de la imagen.
-            ¡Solo puede haber una instrucción CMD por Dockerfile! Si hay definido más de uno solo el úñtimo tendrá efecto.
+            Si hay definido más de un CMD solo el último tendrá efecto.
             
             Cuando se define de algunas de estas dos formas:
                 - CMD ["executable","param1","param2"] (exec form, this is the preferred form)
@@ -31,16 +33,25 @@ https://docs.docker.com/engine/reference/builder/
             Se definen los comandos que serán ejecutados cuando se ejecute la imagen (se cree el contenedor).
             
             Otra forma de definirlo:
-                - CMD ["param1","param2"] (as <b>default parameters to ENTRYPOINT</b>)
+                - CMD ["param1","param2"] (as default parameters to ENTRYPOINT)
             PARA QUE EL CONTENEDOR EJECUTE LO MISMO CADA VEZ, USA CMD COMBINADO CON ENTRYPOINT.
             
     ENTRYPOINT --> Configura un contenedor que correrá como ejecutable.
+                    ENTRYPOINT ["executable", "param1", "param2"] (exec form, preferred)
+                    Si hay definido más de uno solo el último tendrá efecto.
                     Los argumentos de línea definidos en comandos "docker run" se añadirán al final de ENTRYPOINT y
-                    sobreescribirán los argumentos definidos
+                    sobreescribirán los argumentos definidos en el CMD.
+                    docker run <image> -d: pasará "-d" como argumento al entrypoint.
+                    
     
     EXPOSE --> Puerto por el que se va a exponer el contenedor al host. 
               Por defecto usa protocolo TCP, para usar UDP: EXPOSE 80/udp
               Establecer el protocolo cuando se crea un contendor --> docker run -p 80:80/tcp -p 80:80/udp ...
+    
+    WORKDIR --> Establece el directorio de trabajo para cualquier instrucción RUN, CMD, ENTRYPOINT, COPY, ADD 
+                que siga a partir de ese momento.
+    
+    VOLUME --> Crea punto de montaje.
     
     LABEL --> Agrega metadatos a la imagen a través de pares clave-valor.
               Ejemplo: LABEL maintainer="SvenDowideit@home.org.au"
