@@ -4,7 +4,7 @@
 
 https://docs.docker.com/engine/reference/builder/
 
-##Sintaxis del fichero:
+##Sintaxis del fichero##
     FROM --> Imagen que tomamos como base, las siguientes instrucciones se ejecutarán sobre esa imagen.
             Cuando se usa un segundo FROM se "sobreescribe" la imagen base 
             y las siguientes instrucciones se ejecutarán sobre la segunda imagen.
@@ -19,6 +19,24 @@ https://docs.docker.com/engine/reference/builder/
             
             Ejemplos: RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
                       RUN ["/bin/bash", "-c", "echo hello"]
+    
+    CMD --> ¡No confundir con RUN! El propósito es definir el comportamiento de un contenedor en ejecución!
+            RUN ejecuta un comando y lo "comitea" a la imagen, 
+            CMD NO ejecuta nada en tiempo de compilación, si no que especifica el comando que es el propósito de la imagen.
+            ¡Solo puede haber una instrucción CMD por Dockerfile! Si hay definido más de uno solo el úñtimo tendrá efecto.
+            
+            Cuando se define de algunas de estas dos formas:
+                - CMD ["executable","param1","param2"] (exec form, this is the preferred form)
+                - CMD command param1 param2 (shell form, se ejecutará en /bin/sh -c)
+            Se definen los comandos que serán ejecutados cuando se ejecute la imagen (se cree el contenedor).
+            
+            Otra forma de definirlo:
+                - CMD ["param1","param2"] (as <b>default parameters to ENTRYPOINT</b>)
+            PARA QUE EL CONTENEDOR EJECUTE LO MISMO CADA VEZ, USA CMD COMBINADO CON ENTRYPOINT.
+            
+    ENTRYPOINT --> Configura un contenedor que correrá como ejecutable.
+                    Los argumentos de línea definidos en comandos "docker run" se añadirán al final de ENTRYPOINT y
+                    sobreescribirán los argumentos definidos
     
     EXPOSE --> Puerto por el que se va a exponer el contenedor al host. 
               Por defecto usa protocolo TCP, para usar UDP: EXPOSE 80/udp
