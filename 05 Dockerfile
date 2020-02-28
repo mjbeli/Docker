@@ -1,0 +1,44 @@
+
+    docker build .  --> busca en la carpeta actual un fichero con nombre Dockerfile y construye una imagen a partir del mismo.
+
+
+https://docs.docker.com/engine/reference/builder/
+
+###Sintaxis del fichero:
+    FROM --> Imagen que tomamos como base, las siguientes instrucciones se ejecutarán sobre esa imagen.
+            Cuando se usa un segundo FROM se "sobreescribe" la imagen base 
+            y las siguientes instrucciones se ejecutarán sobre la segunda imagen.
+    
+    RUN --> ejecuta comandos en la imagen actual (definida en el FROM) y les hace commit.
+            Estas ejecuciones se van "acumulando", la imagen resultante se usará en el siguiente paso
+            definido en el Dockerfile, o sea que 3 RUN seguidos se ejecutarán de forma acumulativa.
+            
+            RUN <command>: ejecuta un comando /bin/sh -c en linux y cmd /S /C en Windows.
+            RUN ["executable", "param1", "param2"]: alternativa para evitar munging y que se ejecuten 
+                                                    comandos que no existan en el shell.
+            
+            Ejemplos: RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
+                      RUN ["/bin/bash", "-c", "echo hello"]
+    
+    EXPOSE --> Puerto por el que se va a exponer el contenedor al host. 
+              Por defecto usa protocolo TCP, para usar UDP: EXPOSE 80/udp
+              Establecer el protocolo cuando se crea un contendor --> docker run -p 80:80/tcp -p 80:80/udp ...
+    
+    LABEL --> Agrega metadatos a la imagen a través de pares clave-valor.
+              Ejemplo: LABEL maintainer="SvenDowideit@home.org.au"
+              Ejemplo varias líneas: LABEL multi.label1="value1" \
+                                            multi.label2="value2" \
+                                            other="value3"
+              Cuando se inspecciona una imagen se pueden ver estas etiquetas: docker inspect myimage
+              [...]
+              "Labels": {
+                  "multi.label1": "value1",
+                  "multi.label2": "value2",
+                  "other": "value3"
+              },
+              [...]
+    MAINTAINER --> ¡deprecated! Autor de la imagen ¡¡¡Usa label!!!
+    
+    
+    
+      
