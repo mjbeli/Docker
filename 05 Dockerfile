@@ -4,7 +4,7 @@
 
 https://docs.docker.com/engine/reference/builder/
 
-###Sintaxis del fichero:
+##Sintaxis del fichero:
     FROM --> Imagen que tomamos como base, las siguientes instrucciones se ejecutarán sobre esa imagen.
             Cuando se usa un segundo FROM se "sobreescribe" la imagen base 
             y las siguientes instrucciones se ejecutarán sobre la segunda imagen.
