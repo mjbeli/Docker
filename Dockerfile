@@ -18,5 +18,6 @@ WORKDIR WebSampleApp
 # final stage/image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic
 #WORKDIR /app
-COPY --from=build /Publish ./
-ENTRYPOINT ["./WebSampleApp"]
+#COPY --from=build /Publish ./
+COPY /WebSampleApp/Publish ./Publish
+ENTRYPOINT ["./Publish/WebSampleApp.dll"]
