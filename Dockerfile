@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
-COPY *.sln .
+#COPY *.sln .
 COPY WebSampleApp/*.csproj ./WebSampleApp/
 RUN dotnet restore -r linux-x64
 
