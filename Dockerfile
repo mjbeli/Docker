@@ -10,7 +10,7 @@ WORKDIR /source
 #RUN dotnet restore -r linux-x64
 
 # copy everything else and build app
-COPY WebSampleApp/. ./WebSampleApp/
+COPY WebSampleApp/. ./WebSampleApp
 WORKDIR WebSampleApp
 #RUN dotnet restore -r linux-x64
 #RUN dotnet publish -c release -o /Publish -r linux-x64 --self-contained false --no-restore
