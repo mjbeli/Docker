@@ -18,6 +18,6 @@ RUN dotnet publish -c release -o /Publish -r linux-x64 --self-contained false --
 # final stage/image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic
 #WORKDIR /app
-#COPY --from=build /Publish ./
-COPY /WebSampleApp/Publish ./Publish
-ENTRYPOINT ["./Publish/WebSampleApp.dll"]
+COPY --from=build source/WebSampleApp/Publish ./Publish
+#COPY /WebSampleApp/Publish ./Publish
+ENTRYPOINT ["dotnet", "./Publish/WebSampleApp.dll"]
