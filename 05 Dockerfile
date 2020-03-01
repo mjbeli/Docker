@@ -1,5 +1,7 @@
 
     docker build .  --> busca en la carpeta actual un fichero con nombre Dockerfile y construye una imagen a partir del mismo.
+    docker build --tag="sample-web-app:latest" . --> genera imagen con nombre:etiqueta indicada.
+                                                    El nombre "sample-web-app" debe ser minúsculas.
 
 
 https://docs.docker.com/engine/reference/builder/
