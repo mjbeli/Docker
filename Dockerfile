@@ -3,7 +3,7 @@
 # https://hub.docker.com/_/microsoft-dotnet-core
 
 # This first image is just for compile purpuoses, SDK image for restore and publish.
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
