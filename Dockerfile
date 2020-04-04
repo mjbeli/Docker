@@ -14,6 +14,7 @@ WORKDIR /source
 # copy everything else and build app
 COPY WebSampleApp/. ./WebSampleApp
 WORKDIR WebSampleApp
+RUN dotnet clean
 RUN dotnet restore -r linux-x64
 RUN dotnet publish -c release -o /Publish -r linux-x64 --self-contained false --no-restore
 
@@ -23,5 +24,7 @@ EXPOSE 80
 # This image is just for Execute ASP.NET CORE Dlls in ubuntu x64. This image cann't compile or build.
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic
 # Copy from build image (where the published DLLs are), to the current image base
-COPY --from=build source/WebSampleApp/Publish ./Publish
+COPY --from=build source/WebSampleApp/Publish/ ./Publish/
+# I want to check folders and files in Publish folder.
+RUN ls -la ./Publish/* 
 ENTRYPOINT ["dotnet", "./Publish/WebSampleApp.dll"]
